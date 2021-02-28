@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--UserDao의 SQL입니다.-->
+<mapper namespace="user">
+    <select id="get_user_list" resultType="userBean">
+        <![CDATA[
+            select * from user_table
+        ]]>
+    </select>
+
+    <select id="get_user" parameterType="java.lang.String" resultType="userBean">
+        <![CDATA[
+            select * from user_table
+            where user_id = #{userId}
+        ]]>
+    </select>
+</mapper>
+
