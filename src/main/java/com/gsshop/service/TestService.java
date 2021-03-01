@@ -26,7 +26,6 @@ public class TestService {
         return userBeanList;
     }
 
-    @RedisCacheFirst
     UserBean getUser(String userId){
         UserBean userBean = userDao.getUser(userId).orElse(null);
         return userBean;

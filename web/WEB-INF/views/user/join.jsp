@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<c:set var='root' value="${pageContext.request.contextPath}/" />
+<c:set var='root' value="${pageContext.request.contextPath}/"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +22,8 @@
         <div class="col-sm-6">
             <div class="card shadow">
                 <div class="card-body">
-                    <form:form action="${root}/join_pro" method="post" modelAttribute="joinUserBean">
+                    <form:form action="${root}user/join_pro" method="post" modelAttribute="joinUserBean">
+                        <form:hidden path="userIdExist"/>
                         <div class="form-group">
                             <form:label path="userName">이름</form:label>
                             <form:input path="userName" id="user_name" name="user_name" class="form-control"/>
@@ -31,11 +32,12 @@
                         <div class="form-group">
                             <form:label path="userId" name="user_id">아이디</form:label>
                             <div class="input-group">
-                                <form:input path="userid" id="user_id" name="user_id" class="form-control"/>
+                                <form:input path="userId" id="user_id" name="user_id" class="form-control"/>
                                 <div class="input-group-append">
                                     <button type="button" class="btn btn-primary">중복확인</button>
                                 </div>
                             </div>
+                            <form:errors path="userId"/>
                         </div>
                         <div class="form-group">
                             <form:label path="userPw">비밀번호</form:label>

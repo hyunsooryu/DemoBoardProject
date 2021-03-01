@@ -128,5 +128,14 @@ public class ControllerTest {
                 .andReturn();
     }
 
+    @Test
+    @DisplayName(value = "AjaxController -> id의 유효성을 확인하는 테스트입니다.")
+    void ajax_controller_user_id_test() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/api/user/"))
+                .andExpect(status().isOk())
+                .andDo(print())
+                .andReturn();
+    }
+
 
 }

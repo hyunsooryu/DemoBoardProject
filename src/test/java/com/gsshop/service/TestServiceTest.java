@@ -52,4 +52,11 @@ class TestServiceTest {
                 .filter("류현수"::equals)
                 .isPresent());
     }
+
+    @Test
+    void testNull(){
+        String data = null;
+        Optional<String> tmpData = Optional.ofNullable("HYUNSOO");
+        System.out.println(tmpData.isPresent());
+    }
 }

@@ -36,7 +36,6 @@
                                     <button type="button" class="btn btn-primary">중복확인</button>
                                 </div>
                             </div>
-                            <form:errors path="userId"/>
                         </div>
                         <div class="form-group">
                             <form:label path="userPw">비밀번호</form:label>
