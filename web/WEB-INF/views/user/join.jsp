@@ -13,6 +13,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <c:import url="/WEB-INF/views/include/top_menu.jsp"/>
@@ -34,7 +35,7 @@
                             <div class="input-group">
                                 <form:input path="userId" id="user_id" name="user_id" class="form-control"/>
                                 <div class="input-group-append">
-                                    <button type="button" class="btn btn-primary">중복확인</button>
+                                    <button id="checkBtn" type="button" class="btn btn-primary">중복확인</button>
                                 </div>
                             </div>
                             <form:errors path="userId"/>
@@ -62,6 +63,35 @@
     </div>
 </div>
 <c:import url="/WEB-INF/views/include/bottom_info.jsp"/>
+<script>
+
+    document.getElementById("checkBtn").addEventListener("click",function(){
+       checkUserIdExist();
+    });
+
+    function checkUserIdExist(){
+       var userIdObject = document.getElementById("user_id");
+       var userId = userIdObject.value.trim();
+       if(userId.length == 0){
+           alert("아이디를 입력해주세요");
+           return;
+       }
+
+       axios.get('${root}api/user/' + userId)
+        .then(function(response){
+            if(response.data.trim() == "N"){
+                alert("사용할 수 있는 아이디입니다.");
+                document.getElementById("userIdExist").value = "false";
+            }else{
+                alert("이미 중복 된 아이디가 있습니다.");
+                userIdObject.value = "";
+                document.getElementById("userIdExist").value = "true";
+            }
+        });
+
+    }
+
+</script>
 </body>
 </html>
 

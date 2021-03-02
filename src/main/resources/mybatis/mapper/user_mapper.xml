@@ -16,5 +16,17 @@
         ]]>
     </select>
 
+    <insert id="add_user_info" parameterType="userBean">
+        <selectKey keyProperty="userIdx" order="BEFORE" resultType="java.lang.Integer">
+            select user_seq.nextval from dual
+        </selectKey>
+        <![CDATA[
+            insert into user_table(user_idx, user_name, user_id, user_pw)
+            values(#{userIdx}, #{userName}, #{userId}, #{userPw})
+        ]]>
+    </insert>
+
+
+
 </mapper>
 

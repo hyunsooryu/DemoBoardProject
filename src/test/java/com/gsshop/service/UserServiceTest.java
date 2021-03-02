@@ -1,5 +1,6 @@
 package com.gsshop.service;
 
+import com.gsshop.beans.UserBean;
 import com.gsshop.config.RootAppContext;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -34,5 +35,14 @@ class UserServiceTest {
             assertTrue(userService.checkIdAlreadyExist("blessdutch"));
         }
         );
+    }
+    @Test
+    void addUserInfoTest(){
+        UserBean testUserBean = UserBean.builder()
+                .userId("test555")
+                .userName("한지민여왕님")
+                .userPw("100825asa")
+                .build();
+        userService.addUserInfo(testUserBean);
     }
 }

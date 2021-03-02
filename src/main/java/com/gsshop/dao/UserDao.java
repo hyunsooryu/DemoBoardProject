@@ -22,5 +22,9 @@ public class UserDao {
         return Optional.ofNullable(userBean);
     }
 
+    public void addUserInfo(UserBean joinUserBean){
+        sqlSessionTemplate.insert("user.add_user_info", joinUserBean);
+    }
+
 
 }

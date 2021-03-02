@@ -1,6 +1,7 @@
 package com.gsshop.controller;
 
 import com.gsshop.beans.UserBean;
+import com.gsshop.service.UserService;
 import com.gsshop.validator.UserValidator;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,10 +19,17 @@ public class UserController {
     @Resource(name = "userValidator")
     private Validator userValidator;
 
+    private final UserService userService;
+
+    public UserController(UserService userService){
+        this.userService = userService;
+    }
+
     @GetMapping("/login")
     public String login(){
         return "user/login";
     }
+
     @GetMapping("/join")
     public String join(@ModelAttribute("joinUserBean") UserBean userBean){
         return "user/join";
@@ -33,6 +41,7 @@ public class UserController {
             System.out.println("HYUNSOO LOG POINT AAA");
             return "user/join";
         }
+        userService.addUserInfo(userBean);
         return "user/join_success";
     }
 
@@ -47,7 +56,8 @@ public class UserController {
     }
 
     @InitBinder
-    public void initBinder(WebDataBinder binder){
+    public void initBinder(WebDataBinder binder) {
+        System.out.println("INIT-BINDER HYUNSOO LOG");
         binder.addValidators(userValidator);
     }
 
