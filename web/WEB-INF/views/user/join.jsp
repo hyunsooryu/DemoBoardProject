@@ -27,13 +27,13 @@
                         <form:hidden path="userIdExist"/>
                         <div class="form-group">
                             <form:label path="userName">이름</form:label>
-                            <form:input path="userName" id="user_name" name="user_name" class="form-control"/>
+                            <form:input path="userName"  class="form-control"/>
                             <form:errors path="userName"/>
                         </div>
                         <div class="form-group">
-                            <form:label path="userId" name="user_id">아이디</form:label>
+                            <form:label path="userId" >아이디</form:label>
                             <div class="input-group">
-                                <form:input path="userId" id="user_id" name="user_id" class="form-control"/>
+                                <form:input path="userId" class="form-control"/>
                                 <div class="input-group-append">
                                     <button id="checkBtn" type="button" class="btn btn-primary">중복확인</button>
                                 </div>
@@ -42,12 +42,12 @@
                         </div>
                         <div class="form-group">
                             <form:label path="userPw">비밀번호</form:label>
-                            <form:password path="userPw" id="user_pw" name="user_pw" class="form-control"/>
+                            <form:password path="userPw" class="form-control"/>
                             <form:errors path="userPw"/>
                         </div>
                         <div class="form-group">
                             <form:label path="userPw2">비밀번호 확인</form:label>
-                            <form:password path="userPw2" id="user_pw2" name="user_pw2" class="form-control"/>
+                            <form:password path="userPw2" class="form-control"/>
                             <form:errors path="userPw2"/>
                         </div>
                         <div class="form-group">
@@ -70,7 +70,7 @@
     });
 
     function checkUserIdExist(){
-       var userIdObject = document.getElementById("user_id");
+       var userIdObject = document.getElementById("userId");
        var userId = userIdObject.value.trim();
        if(userId.length == 0){
            alert("아이디를 입력해주세요");

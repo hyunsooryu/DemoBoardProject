@@ -1,6 +1,7 @@
 package com.gsshop.dao;
 
 import com.gsshop.beans.BoardInfoBean;
+import com.gsshop.beans.UserBean;
 import com.gsshop.config.RootAppContext;
 import org.junit.jupiter.api.DisplayNameGeneration;
 import org.junit.jupiter.api.DisplayNameGenerator;
@@ -17,15 +18,19 @@ class BoardDaoTest {
 
     final BoardDao boardDao;
 
+    final UserDao userDao;
+
     @Autowired
-    BoardDaoTest(BoardDao boardDao){
+    BoardDaoTest(BoardDao boardDao, UserDao userDao){
         this.boardDao = boardDao;
+        this.userDao = userDao;
     }
 
 
     @Test
     void injection_test(){
         assertNotNull(boardDao);
+        assertNotNull(userDao);
     }
 
     /*
@@ -41,5 +46,11 @@ class BoardDaoTest {
                         System.out.println(boardInfoBean);
                     });
                });
+    }
+
+    @Test
+    void get_login_user_info(){
+        assertNotNull(userDao.getLoginUserInfo(UserBean.builder().userId("blessdutch").userPw("100825aas").build())
+                .orElse(null));
     }
 }

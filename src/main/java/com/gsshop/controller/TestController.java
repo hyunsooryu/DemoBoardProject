@@ -1,23 +1,35 @@
 package com.gsshop.controller;
 
 
+import com.gsshop.beans.UserBean;
+import com.gsshop.beans.ValidateTestBean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
 
 @Controller
 public class TestController {
-    @GetMapping("/test")
-    public String test(HttpServletRequest request, ModelMap model){
-        Map<String, Object> map = new HashMap<>();
-        map.put("hyunsoo","awesome");
-        map.put("yongho","handsome");
-        map.put("data", request.getAttribute("data"));
-        model.addAllAttributes(map);
-        return "test";
+    @Resource(name = "loginUserBean")
+    private UserBean loginUserBean;
+
+
+    @GetMapping(value = "/test", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public String test(@Valid @ModelAttribute ValidateTestBean bean, BindingResult result, ModelMap model){
+       if(result.hasErrors()){
+           System.out.println("ERROR");
+           return "ERROR";
+       }
+
+       return "GOOD";
     }
 }

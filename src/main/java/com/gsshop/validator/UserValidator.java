@@ -15,8 +15,10 @@ public class UserValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
+        /*
         errors.getAllErrors().stream()
               .forEach(error->System.out.println(error.getCodes()[0]));
+         */
         UserBean userBean = (UserBean)o;
         //joinUserBean일 경우에만 진행
         System.out.println("HYUNSOO LOG POINT BBB");
@@ -32,4 +34,5 @@ public class UserValidator implements Validator {
             }
         }
     }
+
 }

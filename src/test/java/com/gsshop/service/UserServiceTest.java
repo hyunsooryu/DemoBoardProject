@@ -45,4 +45,19 @@ class UserServiceTest {
                 .build();
         userService.addUserInfo(testUserBean);
     }
+
+    @Test
+    void loginTest(){
+        UserBean tmpLoginUserBean = UserBean.builder()
+                .userId("blessdutch")
+                .userPw("100825asas")
+                .build();
+
+        UserBean sessionBean = new UserBean();
+
+        userService.getLoginUserInfo(tmpLoginUserBean, sessionBean);
+        assertTrue(sessionBean.isUserLogin());
+
+
+    }
 }

@@ -1,6 +1,7 @@
 package com.gsshop.config;
 
 
+import com.gsshop.beans.UserBean;
 import com.gsshop.interceptor.TopMenuInterceptor;
 import com.gsshop.service.BoardService;
 import com.gsshop.validator.UserValidator;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Validator;
 import org.springframework.web.servlet.config.annotation.*;
 
+import javax.annotation.Resource;
+
 //Spring MVC 프로젝트에 관련한 설정을 하는 클래스입니다.
 @Configuration
 @EnableWebMvc
@@ -22,10 +25,15 @@ public class ServletAppContext implements WebMvcConfigurer {
 
     private BoardService boardService;
 
+    private UserBean loginUserBean;
+
     @Autowired
     public void setBoardService(BoardService boardService) {
         this.boardService = boardService;
     }
+
+    @Resource(name = "loginUserBean")
+    public void setLoginUserBean(UserBean loginUserBean){this.loginUserBean = loginUserBean;}
 
     //리소스에 관한 설정을 지정합니다.
     @Override
@@ -47,7 +55,8 @@ public class ServletAppContext implements WebMvcConfigurer {
     //인터셉터를 등록합니다.
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        TopMenuInterceptor topMenuInterceptor = new TopMenuInterceptor(boardService);
+        System.out.println("LOG 22222222");
+        TopMenuInterceptor topMenuInterceptor = new TopMenuInterceptor(boardService, loginUserBean);
         WebMvcConfigurer.super.addInterceptors(registry);
         InterceptorRegistration regTopMenuList = registry.addInterceptor(topMenuInterceptor);
         regTopMenuList.addPathPatterns("/**");
@@ -61,7 +70,7 @@ public class ServletAppContext implements WebMvcConfigurer {
 
     //메세지를 등록해서 사용
     @Bean
-    ReloadableResourceBundleMessageSource messageSource(){
+    public ReloadableResourceBundleMessageSource messageSource(){
         ReloadableResourceBundleMessageSource res = new ReloadableResourceBundleMessageSource();
         res.setBasenames("classpath:/properties/error_message");
         res.setCacheSeconds(3);
@@ -69,12 +78,10 @@ public class ServletAppContext implements WebMvcConfigurer {
         return res;
     }
 
-
-
     //Validator 설정
     @Bean("userValidator")
-    Validator userValidator(){
-        Validator userValidator = new UserValidator();
+    public UserValidator userValidator(){
+        UserValidator userValidator = new UserValidator();
         return userValidator;
     }
 

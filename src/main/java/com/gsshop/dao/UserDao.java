@@ -26,5 +26,10 @@ public class UserDao {
         sqlSessionTemplate.insert("user.add_user_info", joinUserBean);
     }
 
+    public Optional<UserBean> getLoginUserInfo(UserBean tmpLoginUserBean){
+        UserBean tmpBean = sqlSessionTemplate.selectOne("user.get_login_user_info", tmpLoginUserBean);
+        return Optional.ofNullable(tmpBean);
+    }
+
 
 }

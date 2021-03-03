@@ -26,6 +26,14 @@
         ]]>
     </insert>
 
+    <select id="get_login_user_info" resultType="userBean" parameterType="userBean">
+        <![CDATA[
+            select user_idx, user_name
+            from user_table
+            where #{userId} = user_id and #{userPw} = user_pw
+        ]]>
+    </select>
+
 
 
 </mapper>
