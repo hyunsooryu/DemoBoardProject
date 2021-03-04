@@ -16,6 +16,11 @@ public class UserDao {
         this.sqlSessionTemplate = sqlSessionTemplate;
     }
 
+    public Optional<List<UserBean>> getUserList(){
+        List<UserBean> userBeanList = sqlSessionTemplate.selectList("user.get_user_list");
+        return Optional.ofNullable(userBeanList);
+    }
+
     public Optional<UserBean> getUser(String userId){
         System.out.println("DB 조회를 시작합니다.");
         UserBean userBean = sqlSessionTemplate.selectOne("user.get_user", userId);
@@ -30,6 +35,12 @@ public class UserDao {
         UserBean tmpBean = sqlSessionTemplate.selectOne("user.get_login_user_info", tmpLoginUserBean);
         return Optional.ofNullable(tmpBean);
     }
+
+    public Optional<UserBean> getModifyUserInfo(int userIdx){
+        UserBean tmpBean = sqlSessionTemplate.selectOne("user.get_modify_user_info", userIdx);
+        return Optional.ofNullable(tmpBean);
+    }
+
 
 
 }

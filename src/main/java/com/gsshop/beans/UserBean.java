@@ -25,6 +25,8 @@ public class UserBean implements Serializable {
 
     private int userIdx;
 
+    private int loginTryNum;
+
 
     @Size(min = 2, max=4)
     @Pattern(regexp = "[가-힣]*")

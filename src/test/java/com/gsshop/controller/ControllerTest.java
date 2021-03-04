@@ -1,5 +1,6 @@
 package com.gsshop.controller;
 
+import com.gsshop.beans.UserBean;
 import com.gsshop.config.RootAppContext;
 import com.gsshop.config.ServletAppContext;
 import com.gsshop.config.SpringConfig;
@@ -46,6 +47,9 @@ public class ControllerTest {
                 new CharacterEncodingFilter("UTF-8")
         ).addFilter(new hyunsooFilter())
                 .build();
+        UserBean sessionBean = (UserBean)this.context.getBean("loginUserBean", UserBean.class);
+        sessionBean.setUserIdx(1);
+        sessionBean.setUserLogin(true);
     }
 
     @Test
@@ -155,6 +159,15 @@ public class ControllerTest {
                 // .andExpect(MockMvcResultMatchers
                 //         .forwardedUrl("/WEB-INF/views/user/gateway.jsp")).andReturn();
                 .andReturn();
+    }
+
+    @Test
+    @DisplayName(value="user/modify의 포스트 매핑을 확인하는 테스트입니다.")
+    void controller_user_modify() throws Exception{
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(
+                "/user/modify")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+        ).andExpect(status().isOk()).andDo(print()).andReturn();
     }
 
 

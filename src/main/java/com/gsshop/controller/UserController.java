@@ -4,6 +4,7 @@ import com.gsshop.beans.UserBean;
 import com.gsshop.beans.ValidateTestBean;
 import com.gsshop.service.UserService;
 import com.gsshop.validator.UserValidator;
+import oracle.jdbc.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+
+import static com.gsshop.utils.GateWayUtils.NOT_LOGIN;
 
 @Controller
 @RequestMapping("/user")
@@ -77,7 +81,9 @@ public class UserController {
     }
 
     @GetMapping("/modify")
-    public String modify(){
+    public String modify(@ModelAttribute(name="modifyUserBean") UserBean modifyUserBean){
+        //modifyUserBean setting
+        userService.getModifyUserInfo(modifyUserBean, loginUserBean);
         return "user/modify";
     }
 
@@ -88,10 +94,22 @@ public class UserController {
         return "user/gateway";
     }
 
+    @GetMapping("/gateway")
+    public String gateway(HttpServletRequest request,
+                          @RequestParam(name="case", required = true) String _case, ModelMap model){
+        if(NOT_LOGIN.equals(_case)) {
+            model.addAttribute(SUCCESS_FLG,NOT_LOGIN);
+            model.addAttribute("not_login_url", request.getContextPath().toString() + "/user/login");
+        }
+        return "user/gateway";
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         System.out.println("INIT-BINDER HYUNSOO LOG");
         binder.addValidators(userValidator);
     }
+
+
 
 }

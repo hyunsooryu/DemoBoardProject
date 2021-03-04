@@ -21,7 +21,6 @@ public class UserValidator implements Validator {
          */
         UserBean userBean = (UserBean)o;
         //joinUserBean일 경우에만 진행
-        System.out.println("HYUNSOO LOG POINT BBB");
         if(errors.getObjectName().equals("joinUserBean")) {
             if (!userBean.getUserPw().equals(userBean.getUserPw2())) {
                 errors.rejectValue("userPw", "NotEquals");
@@ -33,6 +32,7 @@ public class UserValidator implements Validator {
                 errors.rejectValue("userId","DontCheckUserIdExist");
             }
         }
+
     }
 
 }

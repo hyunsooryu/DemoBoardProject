@@ -53,4 +53,17 @@ class BoardDaoTest {
         assertNotNull(userDao.getLoginUserInfo(UserBean.builder().userId("blessdutch").userPw("100825aas").build())
                 .orElse(null));
     }
+
+    @Test
+    void get_modify_user_info(){
+        assertNull(userDao.getModifyUserInfo(1).orElse(null));
+    }
+
+    @Test
+    void get_user_list(){
+        assertNotNull(userDao.getUserList());
+        userDao.getUserList().ifPresent(userList->{
+            userList.stream().forEach(System.out::println);
+        });
+    }
 }

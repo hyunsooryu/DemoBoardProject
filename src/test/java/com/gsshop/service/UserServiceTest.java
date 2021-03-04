@@ -60,4 +60,10 @@ class UserServiceTest {
 
 
     }
+
+    @Test
+    void modifyUserTest(){
+       // UserBean modifyUserBean = userService.getModifyUserInfo(1);
+       // assertNotNull(modifyUserBean);
+    }
 }

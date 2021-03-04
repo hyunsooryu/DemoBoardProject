@@ -10,5 +10,7 @@
     <typeAliases>
         <typeAlias alias="userBean" type="com.gsshop.beans.UserBean"/>
         <typeAlias alias="boardInfoBean" type="com.gsshop.beans.BoardInfoBean"/>
+        <typeAlias alias="integer" type="java.lang.Integer"/>
+        <typeAlias alias="string" type="java.lang.String"/>
     </typeAliases>
 </configuration>

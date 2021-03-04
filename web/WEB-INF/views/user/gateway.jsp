@@ -23,6 +23,11 @@
             location.href = "${root}main";
             break;
 
+        case "not_login":
+            alert("로그인이 필요합니다.");
+            location.href = "${not_login_url}";
+            break;
+
     }
 </script>
 

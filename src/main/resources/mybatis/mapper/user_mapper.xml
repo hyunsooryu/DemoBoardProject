@@ -34,6 +34,18 @@
         ]]>
     </select>
 
+    <select id="get_modify_user_info" resultType="userBean" parameterType="integer">
+        <![CDATA[
+            select user_id, user_name
+            from user_table
+            where #{userIdx} = user_idx
+        ]]>
+    </select>
+
+
+
+
+
 
 
 </mapper>
