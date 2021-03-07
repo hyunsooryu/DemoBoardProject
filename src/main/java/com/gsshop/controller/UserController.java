@@ -17,6 +17,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import java.util.HashMap;
+
+import static com.gsshop.utils.GateWayUtils.MODIFY_SUCCESS;
 import static com.gsshop.utils.GateWayUtils.NOT_LOGIN;
 
 @Controller
@@ -85,6 +88,23 @@ public class UserController {
         //modifyUserBean setting
         userService.getModifyUserInfo(modifyUserBean, loginUserBean);
         return "user/modify";
+    }
+
+    @PostMapping("/modify_pro")
+    public String modify(@Valid @ModelAttribute(name="modifyUserBean") UserBean modifyUserBean, BindingResult result, ModelMap model){
+        if(result.hasErrors()){
+            result.getAllErrors().stream()
+            .forEach(tmp-> System.out.println(tmp));
+            return "user/modify";
+        }
+
+        HashMap<String, Object> criteria = new HashMap<>();
+        criteria.put("userPw", modifyUserBean.getUserPw());
+        criteria.put("userIdx", loginUserBean.getUserIdx());
+
+        userService.updateModifyUserInfo(criteria);
+        model.addAttribute(SUCCESS_FLG, MODIFY_SUCCESS);
+        return "user/gateway";
     }
 
     @GetMapping("/logout")

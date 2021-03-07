@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.function.Consumer;
 
@@ -45,5 +46,9 @@ public class UserService {
                     modifyUserBean.setUserName(tmpModifyUserBean.getUserName());
                     modifyUserBean.setUserId(tmpModifyUserBean.getUserId());
                 });
+    }
+
+    public void updateModifyUserInfo(HashMap<String,Object> criteria){
+        userDao.updateModifyUserInfo(criteria);
     }
 }

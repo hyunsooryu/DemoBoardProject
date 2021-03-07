@@ -4,6 +4,7 @@ import com.gsshop.beans.UserBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,6 +40,10 @@ public class UserDao {
     public Optional<UserBean> getModifyUserInfo(int userIdx){
         UserBean tmpBean = sqlSessionTemplate.selectOne("user.get_modify_user_info", userIdx);
         return Optional.ofNullable(tmpBean);
+    }
+
+    public void updateModifyUserInfo(HashMap<String, Object> criteria){
+        sqlSessionTemplate.update("user.update_modify_user_info", criteria);
     }
 
 

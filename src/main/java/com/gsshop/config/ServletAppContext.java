@@ -14,6 +14,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Validator;
+import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
 import javax.annotation.Resource;
@@ -90,7 +91,11 @@ public class ServletAppContext implements WebMvcConfigurer {
         return userValidator;
     }
 
-
-
+    //xml은 필터설정을 해줘야 쓸 수 있다.
+    //파일 전송을 위한 빈 등록
+    @Bean
+    public StandardServletMultipartResolver multipartResolver(){
+        return new StandardServletMultipartResolver();
+    }
 
 }

@@ -34,7 +34,7 @@ public class CacheAppContext {
         JedisConnectionFactory connectionFactory = new JedisConnectionFactory();
         connectionFactory.setHostName(redisHost);
         connectionFactory.setPort(redisPort);
-        // connectionFactory.setTimeout(Duration.ofSeconds(60L).);
+       // connectionFactory.setTimeout(Duration.ofSeconds(60));
         connectionFactory.setPoolConfig(jedisPoolConfig);
         return connectionFactory;
     }
@@ -57,7 +57,7 @@ public class CacheAppContext {
         poolConfig.setMaxTotal(2000);
         poolConfig.setMaxIdle(128);
         poolConfig.setMinIdle(36);
-        poolConfig.setMaxWaitMillis(1000);
+        poolConfig.setMaxWaitMillis(10000);
         poolConfig.setTestOnBorrow(true);
         poolConfig.setTestOnReturn(true);
         poolConfig.setTestWhileIdle(true);

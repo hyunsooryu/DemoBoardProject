@@ -21,6 +21,15 @@ public class TestController {
     @Resource(name = "loginUserBean")
     private UserBean loginUserBean;
 
+    @GetMapping(value = "/admin")
+    public String testUrl(HttpServletRequest request){
+        loginUserBean.setUserLogin(true);
+        loginUserBean.setUserIdx(1);
+        loginUserBean.setUserId("blessdutch");
+        loginUserBean.setUserName("류현수");
+        return "main";
+    }
+
 
     @GetMapping(value = "/test", produces = "application/json; charset=UTF-8")
     @ResponseBody

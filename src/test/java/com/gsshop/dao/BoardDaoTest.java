@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -65,5 +66,26 @@ class BoardDaoTest {
         userDao.getUserList().ifPresent(userList->{
             userList.stream().forEach(System.out::println);
         });
+    }
+
+    @Test
+    void user_update_modify_user_info(){
+        HashMap<String, Object> criteria = new HashMap<>();
+        criteria.put("userPw", "100825");
+        criteria.put("userIdx", 1);
+        try{
+            userDao.updateModifyUserInfo(criteria);
+        }catch(Exception e){}
+    }
+
+
+    @Test
+    void test_get_content_bean_list(){
+        boardDao.getBoardContentList(0)
+                .ifPresent((contentBeanList)->{
+                    contentBeanList.stream().forEach(contentBean->{
+                        System.out.println(contentBean);
+                    });
+                });
     }
 }

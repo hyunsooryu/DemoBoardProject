@@ -25,11 +25,11 @@
                     <form:form action="${root}user/modify_pro" method="post" modelAttribute="modifyUserBean">
                         <div class="form-group">
                             <form:label path="userName">이름</form:label>
-                            <form:input path="userName" class="form-control" value="${modifyUserBean.userName}" disabled="true"/>
+                            <form:input path="userName" class="form-control" value="${modifyUserBean.userName}" readonly="true"/>
                         </div>
                         <div class="form-group">
                             <form:label path="userId">아이디</form:label>
-                            <form:input path="userId" class="form-control" value="${modifyUserBean.userId}" disabled="true"/>
+                            <form:input path="userId" class="form-control" value="${modifyUserBean.userId}" readonly="true"/>
                         </div>
                         <div class="form-group">
                             <form:label path="userPw">비밀번호</form:label>

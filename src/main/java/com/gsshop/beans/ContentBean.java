@@ -1,17 +1,29 @@
 package com.gsshop.beans;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class ContentBean {
-    private int contextIdx;
+    private int contentIdx;
+
+    @NotBlank
     private String contentSubject;
-    private String contextText;
+
+    @NotBlank
+    private String contentText;
+
+    private MultipartFile uploadFile;
+
     private String contentFile;
+
     private int contentWriterIdx;
     private int contentBoardIdx;
     private String contentDate;

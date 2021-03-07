@@ -28,6 +28,10 @@
             location.href = "${not_login_url}";
             break;
 
+        case "modify_success":
+            alert("수정이 완료되엇습니다.");
+            location.href = "${root}main";
+            break;
     }
 </script>
 

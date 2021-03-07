@@ -21,15 +21,17 @@ public class UserValidator implements Validator {
          */
         UserBean userBean = (UserBean)o;
         //joinUserBean일 경우에만 진행
-        if(errors.getObjectName().equals("joinUserBean")) {
+        if(errors.getObjectName().equals("joinUserBean") || errors.getObjectName().equals("modifyUserBean")) {
             if (!userBean.getUserPw().equals(userBean.getUserPw2())) {
                 errors.rejectValue("userPw", "NotEquals");
                 errors.rejectValue("userPw2", "NotEquals");
             }
             System.out.println("true or false");
             System.out.println(userBean.isUserIdExist());
-            if(userBean.isUserIdExist()){
-                errors.rejectValue("userId","DontCheckUserIdExist");
+            if(errors.getObjectName().equals("joinUserBean")) {
+                if (userBean.isUserIdExist()) {
+                    errors.rejectValue("userId", "DontCheckUserIdExist");
+                }
             }
         }
 
